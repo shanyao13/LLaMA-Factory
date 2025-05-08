@@ -60,6 +60,7 @@ def main():
         + "-" * 58
     )
 
+    # 字典（dict）：键是命令字符串，值是函数对象或偏函数
     COMMAND_MAP = {
         "api": run_api,
         "chat": run_chat,

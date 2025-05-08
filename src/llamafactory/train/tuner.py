@@ -90,7 +90,8 @@ def _training_function(config: dict[str, Any]) -> None:
     except Exception as e:
         logger.warning(f"Failed to destroy process group: {e}.")
 
-
+# 主要用于启动训练任务，并支持通过回调函数进行训练过程的监控与调整
+# Ray 是一个开源的分布式计算框架，旨在简化并行和分布式计算的开发，特别是对大规模机器学习和深度学习任务的支持。
 def run_exp(args: Optional[dict[str, Any]] = None, callbacks: Optional[list["TrainerCallback"]] = None) -> None:
     args = read_args(args)
     if "-h" in args or "--help" in args:

@@ -91,6 +91,7 @@ class ChatModel:
         r"""Asynchronously get a list of responses of the chat model."""
         return await self.engine.chat(messages, system, tools, images, videos, audios, **input_kwargs)
 
+    # 一个异步生成器函数，用于逐步生成聊天模型的响应，每次生成一个token。
     def stream_chat(
         self,
         messages: list[dict[str, str]],
@@ -105,8 +106,8 @@ class ChatModel:
         generator = self.astream_chat(messages, system, tools, images, videos, audios, **input_kwargs)
         while True:
             try:
-                task = asyncio.run_coroutine_threadsafe(generator.__anext__(), self._loop)
-                yield task.result()
+                task = asyncio.run_coroutine_threadsafe(generator.__anext__(), self._loop)  # 在非异步环境中运行异步协程
+                yield task.result()   # yield 表示它是一个生成器。
             except StopAsyncIteration:
                 break
 
