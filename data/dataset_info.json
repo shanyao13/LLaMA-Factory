@@ -711,5 +711,18 @@
       "prompt": "content",
       "response": "summary"
     }
+  },
+  "tulu-3-sft-mixture": {
+    "file_name": "tulu-3-sft-mixture/train-00000-of-00006.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
   }
 }

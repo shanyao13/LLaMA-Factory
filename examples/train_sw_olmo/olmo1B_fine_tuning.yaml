@@ -1,5 +1,5 @@
 # model
-model_name_or_path: /root/swZheng/dev/LLaMA-Factory/olmo_hf_pre_model/infer_model   # your_path/olmo-1b  # 需要个性化设置
+model_name_or_path: /mnt/zzb/peixunban/zzb6/home/swZheng/OLMo/tmp/output-1B-infer_model-step177 #/root/swZheng/dev/LLaMA-Factory/olmo_hf_pre_model/infer_model   # your_path/olmo-1b  # 需要个性化设置
 trust_remote_code: true
 
 # method
@@ -9,22 +9,22 @@ finetuning_type: lora
 lora_target: q_proj,v_proj  # 这里看Default module
 
 # dataset
-dataset: identity,alpaca_gpt4_en,adgen_local
+dataset: tulu-3-sft-mixture #identity,alpaca_gpt4_en,adgen_local
 template: default  # 这里看Template
 cutoff_len: 1024
-max_samples: 1000
+# max_samples: 1000
 overwrite_cache: true
 preprocessing_num_workers: 20
 
 # output
-output_dir: output/olmo-1b-sft-adgen  # 需要个性化设置
+output_dir: output/olmo-1b-sft-tulu-test  # 需要个性化设置
 logging_steps: 10
 save_steps: 500
 plot_loss: true
 overwrite_output_dir: true
 
 # train
-per_device_train_batch_size: 64  # 每个设备（如每张 GPU）上的训练批大小，表示在单次前向和反向传播中，每个设备上处理的样本数量
+per_device_train_batch_size: 32  # 每个设备（如每张 GPU）上的训练批大小，表示在单次前向和反向传播中，每个设备上处理的样本数量
 gradient_accumulation_steps: 8  # 梯度累积步数，即经过多少步累积后才进行一次梯度更新，有效批大小 = per_device_train_batch_size × gradient_accumulation_steps × GPU数量
 learning_rate: 0.0001
 num_train_epochs: 3.0           # 训练轮数，即整个数据集被模型遍历的次数。
@@ -32,8 +32,8 @@ lr_scheduler_type: cosine       #学习率调度器类型，控制学习率的�
 warmup_steps: 1000 # 0.1
 fp16: true
 
-# # eval
-# val_size: 0.1
-# per_device_eval_batch_size: 1
+# eval
+val_size: 0.1
+per_device_eval_batch_size: 64
 # evaluation_strategy: steps
-# eval_steps: 500
+eval_steps: 500
