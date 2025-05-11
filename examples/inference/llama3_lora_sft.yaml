@@ -1,5 +1,5 @@
-model_name_or_path:  /root/swZheng/dev/LLaMA-Factory/olmo_hf_pre_model/infer_model # meta-llama/Meta-Llama-3-8B-Instruct
-adapter_name_or_path: output/olmo-1b-sft # output/olmo-1b-sft-chat # 
+model_name_or_path: /mnt/zzb/peixunban/zzb6/home/swZheng/OLMo/tmp/output-1B-infer_model-step177 # /root/swZheng/dev/LLaMA-Factory/olmo_hf_pre_model/infer_model # meta-llama/Meta-Llama-3-8B-Instruct
+adapter_name_or_path: output/olmo-1b-sft-a100-v2/checkpoint-1029 # output/olmo-1b-sft-chat # 
 template: default # llama3he
 infer_backend: huggingface  # choices: [huggingface, vllm, sglang]
 trust_remote_code: true

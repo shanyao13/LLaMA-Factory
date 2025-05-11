@@ -712,8 +712,115 @@
       "response": "summary"
     }
   },
-  "tulu-3-sft-mixture": {
+  "alpa1": {
+    "file_name": "sftData/alpaca_gpt4_data.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "alpa2": {
+    "file_name": "sftData/alpaca_gpt4_data_zh.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "gpt1": {
+    "file_name": "sftData/gpt4all.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "gpt2": {
+    "file_name": "sftData/gpt4all_without_p3.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "in1": {
+    "file_name": "sftData/instinwild_ch.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "in2": {
+    "file_name": "sftData/instinwild_en.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "tulu-3-sft-mixture0": {
     "file_name": "tulu-3-sft-mixture/train-00000-of-00006.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
+  "tulu-3-sft-mixture1": {
+    "file_name": "tulu-3-sft-mixture/train-00001-of-00006.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
+  "tulu-3-sft-mixture2": {
+    "file_name": "tulu-3-sft-mixture/train-00002-of-00006.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
+  "tulu-3-sft-mixture3": {
+    "file_name": "tulu-3-sft-mixture/train-00003-of-00006.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
+  "tulu-3-sft-mixture4": {
+    "file_name": "tulu-3-sft-mixture/train-00004-of-00006.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
+  "tulu-3-sft-mixture5": {
+    "file_name": "tulu-3-sft-mixture/train-00005-of-00006.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "messages"
