@@ -1,0 +1,4 @@
+model_name_or_path: /mnt/zzb/peixunban/zzb6/home/swZheng/LLaMA-Factory/output/merge/olmo_full_sft # /root/swZheng/dev/LLaMA-Factory/olmo_hf_pre_model/infer_model # meta-llama/Meta-Llama-3-8B-Instruct
+template: default # llama3
+infer_backend: huggingface  # choices: [huggingface, vllm, sglang]
+trust_remote_code: true
