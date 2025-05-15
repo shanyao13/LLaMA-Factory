@@ -19,6 +19,10 @@ ARG INSTALL_EETQ=false
 ARG PIP_INDEX=https://pypi.org/simple
 ARG HTTP_PROXY=
 
+# # WandB API Key (optional)
+# ARG WANDB_API_KEY=""
+# ENV WANDB_API_KEY=$WANDB_API_KEY
+
 # Set the working directory
 WORKDIR /app
 
@@ -68,7 +72,8 @@ RUN EXTRA_PACKAGES="metrics"; \
     else \
         pip install -e ".[$EXTRA_PACKAGES]"; \
     fi
-
+# 安装wandb
+RUN pip install accelerate wandb -i https://pypi.tuna.tsinghua.edu.cn/simple
 # Rebuild flash attention
 RUN pip uninstall -y transformer-engine flash-attn && \
     if [ "$INSTALL_FLASHATTN" == "true" ]; then \

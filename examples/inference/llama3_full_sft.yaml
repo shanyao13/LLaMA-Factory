@@ -1,4 +1,4 @@
-model_name_or_path: saves/llama3-8b/full/sft
-template: llama3
+model_name_or_path: output/olmo-1b-sft-a100-tulu-v5-full/checkpoint-15000 # output/olmo-1b-sft-a100-v3/checkpoint-500 #saves/llama3-8b/full/sft
+template: default # llama3
 infer_backend: huggingface  # choices: [huggingface, vllm, sglang]
 trust_remote_code: true

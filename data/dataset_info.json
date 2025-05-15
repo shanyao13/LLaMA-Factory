@@ -831,5 +831,8 @@
       "user_tag": "user",
       "assistant_tag": "assistant"
     }
+  },
+  "tulu-v2":{
+    "file_name": "tulu-v2-formatted.json"
   }
 }
