@@ -79,7 +79,7 @@ def prepare_4d_attention_mask(attention_mask_with_indices: "torch.Tensor", dtype
     attention_mask_4d = torch.where(attention_mask_4d, zero_tensor, min_dtype)
     return attention_mask_4d
 
-
+# 在 DPO 模型训练中 标准化文本输入
 @dataclass
 class MultiModalDataCollatorForSeq2Seq(DataCollatorForSeq2Seq):
     r"""Data collator that supports VLMs.
@@ -142,6 +142,8 @@ class MultiModalDataCollatorForSeq2Seq(DataCollatorForSeq2Seq):
             batch_audios = fake_audios
             batch_audlens[0] = 1
 
+        # 2 添加了“伪输入”（fake input）后，也进行了 padding
+        # 目的：确保在 multi-modal batch 中，即使没有图像/音频，也强制插入一张空白图/空白音频，让 pipeline 不崩
         if len(fake_input_ids) != 0:
             if self.tokenizer.padding_side == "right":
                 features[0]["input_ids"] = features[0]["input_ids"] + fake_input_ids
@@ -154,6 +156,7 @@ class MultiModalDataCollatorForSeq2Seq(DataCollatorForSeq2Seq):
 
             batch_input_ids[0] = features[0]["input_ids"]
 
+        # 构造多模态输入（mm_inputs）
         mm_inputs = self.template.mm_plugin.get_mm_inputs(
             batch_images,
             batch_videos,
@@ -169,6 +172,9 @@ class MultiModalDataCollatorForSeq2Seq(DataCollatorForSeq2Seq):
             for i, feature in enumerate(features):
                 feature["token_type_ids"] = token_type_ids[i]
 
+        # 1 主要padding实现：调用的是 DataCollatorForSeq2Seq.__call__() 方法，它会自动对 features 中的 input_ids、attention_mask、labels 进行 padding
+        # 可以设定：（1）默认：batch内最长序列（2）显示设置max_length（3）设置pad_to_multiple_of:向上pad到整数倍，
+        # 如pad_to_multiple_of=8，这会将序列长度 pad 到最接近的 8 的倍数，可以提升 GPU Tensor Core 加速效果（尤其是在使用 mixed precision 或 bf16 时
         features: dict[str, torch.Tensor] = super().__call__(features)
 
         if self.model is not None and hasattr(self.model, "get_rope_index"):  # for qwen2vl mrope
@@ -237,10 +243,10 @@ class SFTDataCollatorWith4DAttentionMask(MultiModalDataCollatorForSeq2Seq):
 
         return features
 
-
+# 数据收集器（collator），用于对齐训练，如 DPO（Direct Preference Optimization） 或 RLHF
 @dataclass
 class PairwiseDataCollatorWithPadding(MultiModalDataCollatorForSeq2Seq):
-    r"""Data collator for pairwise data."""
+    r"""Data collator for pairwise dat."""
 
     def __call__(self, features: list[dict[str, Any]]) -> dict[str, "torch.Tensor"]:
         r"""Pad batched data to the longest sequence in the batch.
@@ -261,6 +267,7 @@ class PairwiseDataCollatorWithPadding(MultiModalDataCollatorForSeq2Seq):
                 }
                 concatenated_features.append(target_feature)
 
+        # padding 是在它的父类 MultiModalDataCollatorForSeq2Seq 的 __call__ 方法中实现的
         return super().__call__(concatenated_features)
 
 

@@ -40,12 +40,14 @@ def run_dpo(
     finetuning_args: "FinetuningArguments",
     callbacks: Optional[list["TrainerCallback"]] = None,
 ):
+    # 1、获取dataset和model
     tokenizer_module = load_tokenizer(model_args)
     tokenizer = tokenizer_module["tokenizer"]
     template = get_template_and_fix_tokenizer(tokenizer, data_args)
     dataset_module = get_dataset(template, model_args, data_args, training_args, stage="rm", **tokenizer_module)
     model = load_model(tokenizer, model_args, finetuning_args, training_args.do_train)
 
+    # 2、数据格式处理：在 DPO 模型训练中 标准化文本输入，input_ids，attention_mask，labels
     data_collator = PairwiseDataCollatorWithPadding(
         template=template,
         model=model,

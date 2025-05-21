@@ -265,6 +265,7 @@ class MMPluginMixin:
 
         return {"audios": results, "sampling_rates": sampling_rates}
 
+    # 对多模态输入（特别是图像）进行预处理，生成不同模型（如 LLaVA、Qwen2-VL、mllama 等）所需的张量格式，供模型前向推理使用
     def _get_mm_inputs(
         self,
         images: list["ImageInput"],
@@ -380,6 +381,7 @@ class BasePlugin(MMPluginMixin):
         self._validate_input(processor, images, videos, audios)
         return input_ids, labels
 
+    # 将图像、视频、音频等多模态输入处理成批量（batch）的格式，供多模态大语言模型（VLM, Vision-Language Models）使用
     def get_mm_inputs(
         self,
         images: list["ImageInput"],
